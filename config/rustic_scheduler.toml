@@ -1,0 +1,36 @@
+[global]
+address = "127.0.0.1:3012"
+#log-level = "debug"
+#log-file = "/log/rustic.log"
+
+# repository options: Note that all clients must be able to access this repository!
+[repository]
+repository = "/tmp/repo"
+password = "test" 
+
+# You can define as many clientgroups as you like
+[clientgroup.myservers]
+clients = ["latitude"]
+
+[[clientgroup.myservers.sources]]
+source = "/data/dir"
+schedule = "custom"
+options = "default"
+
+[[clientgroup.myservers.sources]]
+source = "~/rust/rustic-scheduler/src"
+schedule = "custom2"
+options = "global"
+
+# Define the scheldules used for the sources
+[schedules]
+daily = "0 0 0 * * * *"
+custom = "5,25,45,55 * * * * * *"
+custom2 = "10,45 * * * * * *"
+    
+# Define the options used for the sources
+[options.default]
+# empty for default options
+
+[options.global]
+git-ignore = true
