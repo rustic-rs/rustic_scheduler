@@ -10,8 +10,9 @@ password = "test"
 
 # You can define as many clientgroups as you like
 [clientgroup.myservers]
-clients = ["latitude"]
+clients = ["my_server1", "my_server2", "my_server3"]
 
+# Define sources, schedules and backup options to be used for all machines in the clientgroup
 [[clientgroup.myservers.sources]]
 source = "/data/dir"
 schedule = "custom"
