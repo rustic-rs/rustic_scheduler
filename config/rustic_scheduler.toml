@@ -1,11 +1,11 @@
 [global]
 address = "127.0.0.1:3012"
-#log-level = "debug"
-#log-file = "/log/rustic.log"
+#log-level = "debug" # not yet implemented
+#log-file = "/log/rustic.log" # not yet implemented
 
 # repository options: Note that all clients must be able to access this repository!
 [repository]
-repository = "/tmp/repo"
+repository = "rest:http://storage-server/repo"
 password = "test" 
 
 # You can define as many clientgroups as you like
@@ -18,15 +18,15 @@ schedule = "custom"
 options = "default"
 
 [[clientgroup.myservers.sources]]
-source = "~/rust/rustic-scheduler/src"
-schedule = "custom2"
+source = "/home/global"
+schedule = "daily"
 options = "global"
 
-# Define the scheldules used for the sources
+# Define the scheldules used for the sources - using crontab schedules
 [schedules]
 daily = "0 0 0 * * * *"
-custom = "5,25,45,55 * * * * * *"
-custom2 = "10,45 * * * * * *"
+custom = "5,25,45,55 * * * * * *" # Test schedule which backups 4x per minute
+custom2 = "10,45 * * * * * *" # Test schedule which backups 2x per minute
     
 # Define the options used for the sources
 [options.default]
