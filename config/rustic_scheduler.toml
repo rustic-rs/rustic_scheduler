@@ -1,12 +1,12 @@
 [global]
 address = "127.0.0.1:3012"
-#log-level = "debug" # not yet implemented
-#log-file = "/log/rustic.log" # not yet implemented
+# log-level = "debug" # not yet implemented
+# log-file = "/log/rustic.log" # not yet implemented
 
 # repository options: Note that all clients must be able to access this repository!
 [repository]
 repository = "rest:http://storage-server/repo"
-password = "test" 
+password = "test"
 
 # You can define as many clientgroups as you like
 [clientgroup.myservers]
@@ -28,7 +28,7 @@ options = "global"
 daily = "0 0 0 * * * *"
 custom = "5,25,45,55 * * * * * *" # Test schedule which backups 4x per minute
 custom2 = "10,45 * * * * * *" # Test schedule which backups 2x per minute
-    
+
 # Define the options used for the sources
 [options.default]
 # empty for default options

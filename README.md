@@ -11,13 +11,14 @@
 ## About
 
 Rustic scheduler is a client/server application to schedule regular backups on
-many clients to the identicall repository controlled by a central scheduling server.
+many clients to the identicall repository controlled by a central scheduling
+server.
 
 It allows to define client groups which are all backuped the same way.
 
-**Note that rustic scheduler is in an early development stage. It uses the
-yet not published `rustic_core` from the rustic crate which needs to be in the
-path `../rustic/crates/rustic_core/` in order to compile the applications.**
+**Note that rustic scheduler is in an early development stage. It uses the yet
+not published `rustic_core` from the rustic crate which needs to be in the path
+`../rustic/crates/rustic_core/` in order to compile the applications.**
 
 ## Getting started
 
