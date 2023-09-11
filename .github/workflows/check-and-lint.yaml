@@ -31,8 +31,8 @@ jobs:
 
       # TODO!: Remove cloning rustic_core when released
       - run: |
+          cd ..
           git clone https://github.com/rustic-rs/rustic.git
-          mv rustic/crates/rustic_core ../rustic_core
 
       - uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1
         with:
@@ -70,8 +70,8 @@ jobs:
 
       # TODO!: Remove cloning rustic_core when released
       - run: |
+          cd ..
           git clone https://github.com/rustic-rs/rustic.git
-          mv rustic/crates/rustic_core ../rustic_core
 
       - uses: actions-rs/clippy-check@b5b5f21f4797c02da247df37026fcd0a5024aa4d # v1
         with:
