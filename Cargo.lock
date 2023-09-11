@@ -1778,6 +1778,7 @@ dependencies = [
 [[package]]
 name = "rustic_core"
 version = "0.6.0"
+source = "git+https://github.com/rustic-rs/rustic#2af074a7f4a98ba4d5270f52da67c8de30c3a67e"
 dependencies = [
  "aes256ctr_poly1305aes",
  "aho-corasick",

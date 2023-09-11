@@ -109,11 +109,6 @@ jobs:
         shell: bash
         run: echo "PROJECT_VERSION=$(git describe --tags)" >> $GITHUB_ENV
 
-      # TODO!: Remove cloning rustic_core when released
-      - run: |
-          cd ..
-          git clone https://github.com/rustic-rs/rustic.git
-
       - name: Cargo build
         uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1
         if: ${{ matrix.job.use-cross == true }}
