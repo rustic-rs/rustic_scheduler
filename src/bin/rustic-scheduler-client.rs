@@ -9,8 +9,7 @@ use rustic_core::{repofile::SnapshotFile, PathList, Repository};
 use tungstenite::{connect, Message};
 use url::Url;
 
-mod message;
-use message::{BackupMessage, BackupResultMessage, HandshakeMessage};
+use rustic_scheduler::message::{BackupMessage, BackupResultMessage, HandshakeMessage};
 
 #[derive(clap_derive::Parser)]
 #[command(author, version, about, long_about = None)]

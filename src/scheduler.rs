@@ -102,6 +102,12 @@ impl Client {
     }
 }
 
+impl Default for Client {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 pub struct Source {
     source: String,
     schedule: Schedule,
@@ -253,5 +259,11 @@ impl Clients {
             client.disconnect()
         }
         self.compute_next_action();
+    }
+}
+
+impl Default for Clients {
+    fn default() -> Self {
+        Self::new()
     }
 }

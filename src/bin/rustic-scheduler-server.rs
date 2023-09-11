@@ -17,13 +17,9 @@ use tokio::{
     time::sleep,
 };
 
-mod config;
-mod message;
-mod scheduler;
-
-use config::{AllBackupOptions, ConfigFile};
-use message::{BackupMessage, BackupResultMessage, HandshakeMessage};
-use scheduler::{Client, Clients, Source, SourceBackupStatus};
+use rustic_scheduler::config::{AllBackupOptions, ConfigFile};
+use rustic_scheduler::message::{BackupMessage, BackupResultMessage, HandshakeMessage};
+use rustic_scheduler::scheduler::{Client, Clients, Source, SourceBackupStatus};
 
 enum ClientMessage {
     Backup { client: String, msg: BackupMessage },
