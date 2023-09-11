@@ -45,13 +45,13 @@ impl Client {
     fn next_invocation(&self) -> Option<Time> {
         match self.state {
             ClientState::Idle | ClientState::NotConnected => {
-                self.sources.get(0).map(|s| s.next_invocation).flatten()
+                self.sources.get(0).and_then(|s| s.next_invocation)
             }
             ClientState::Processing(_) => None,
         }
     }
 
-    fn to_processing(&mut self, time: Time) -> (String, ClientState) {
+    fn to_processing_mut(&mut self, time: Time) -> (String, ClientState) {
         println!("backing up {}", self.sources[0].source);
         let state = std::mem::replace(&mut self.state, ClientState::Processing(time));
         (self.sources[0].source.clone(), state)
@@ -70,7 +70,7 @@ impl Client {
         self.sort_sources();
     }
 
-    fn to_idle(&mut self, time: Time, status: SourceBackupStatus) {
+    fn to_idle_mut(&mut self, time: Time, status: SourceBackupStatus) {
         if let ClientState::Processing(start_time) = self.state {
             let source = &mut self.sources[0];
             source.last_success = source.next_invocation;
@@ -110,6 +110,7 @@ pub struct Source {
     history: Vec<SourceBackup>,
 }
 
+#[allow(dead_code)]
 pub struct SourceBackup {
     scheduled: Time,
     real: Time,
@@ -143,12 +144,12 @@ impl Source {
 struct NextAction(Option<(String, Time)>);
 
 impl NextAction {
-    fn min_with(&mut self, name: &String, date: Option<Time>) {
+    fn min_with(&mut self, name: &str, date: Option<Time>) {
         if let Some(date) = date {
             match self.0 {
                 Some((_, cur_date)) if date >= cur_date => {}
                 _ => {
-                    self.0 = Some((name.clone(), date));
+                    self.0 = Some((name.clone().to_owned(), date));
                 }
             }
         }
@@ -177,7 +178,7 @@ impl Clients {
             .clients
             .iter()
             .fold(NextAction(None), |mut acc, (name, client)| {
-                acc.min_with(&name, client.next_invocation());
+                acc.min_with(name, client.next_invocation());
                 acc
             });
         self.next_action = next_action;
@@ -218,7 +219,7 @@ impl Clients {
                         None
                     }
                     ClientState::Idle => {
-                        let (source, _) = client.to_processing(time);
+                        let (source, _) = client.to_processing_mut(time);
                         Some((next_client.clone(), source))
                     }
                 }
@@ -229,7 +230,10 @@ impl Clients {
     }
 
     pub fn finish_process(&mut self, client: String, time: Time, status: SourceBackupStatus) {
-        self.clients.get_mut(&client).unwrap().to_idle(time, status);
+        self.clients
+            .get_mut(&client)
+            .unwrap()
+            .to_idle_mut(time, status);
         self.compute_next_action();
     }
 
@@ -245,9 +249,9 @@ impl Clients {
     }
 
     pub fn disconnect_client(&mut self, client: String) {
-        self.clients
-            .get_mut(&client)
-            .map(|client| client.disconnect());
+        if let Some(client) = self.clients.get_mut(&client) {
+            client.disconnect()
+        }
         self.compute_next_action();
     }
 }

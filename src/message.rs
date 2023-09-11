@@ -24,6 +24,6 @@ pub struct BackupMessage {
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(tag = "result")]
 pub enum BackupResultMessage {
-    Ok { snapshot: SnapshotFile },
+    Ok { snapshot: Box<SnapshotFile> },
     Error { message: String },
 }

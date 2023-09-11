@@ -12,7 +12,7 @@ use url::Url;
 mod message;
 use message::{BackupMessage, BackupResultMessage, HandshakeMessage};
 
-#[derive(Parser)]
+#[derive(clap_derive::Parser)]
 #[command(author, version, about, long_about = None)]
 struct Opts {
     #[clap(long)]
@@ -64,7 +64,9 @@ fn connect_client(server: Url, name: String) -> Result<()> {
                 let snap_msg = match do_backup(backup_msg) {
                     Ok(snap) => {
                         println!("{snap:?}");
-                        BackupResultMessage::Ok { snapshot: snap }
+                        BackupResultMessage::Ok {
+                            snapshot: Box::new(snap),
+                        }
                     }
                     Err(err) => BackupResultMessage::Error {
                         message: err.to_string(),
