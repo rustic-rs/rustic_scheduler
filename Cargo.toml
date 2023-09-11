@@ -1,9 +1,24 @@
 [package]
 name = "rustic_scheduler"
 version = "0.1.0"
+categories = ["command-line-utilities"]
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+homepage = "https://rustic.cli.rs/"
+keywords = [
+  "backup",
+  "restic",
+  "deduplication",
+  "encryption",
+  "cli",
+  "scheduler",
+]
+license = "Apache-2.0 OR MIT"
+repository = "https://github.com/rustic-rs/rustic_scheduler"
+description = """
+rustic scheduler - a client/server application to schedule regular backups on
+many clients to one identical repository controlled by a central scheduling
+server.
+"""
 
 [[bin]]
 name = "server"

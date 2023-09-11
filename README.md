@@ -1,4 +1,26 @@
-# rustic scheduler - centrally schedule rustic backups
+<p align="center">
+<img src="https://media.githubusercontent.com/media/rustic-rs/docs/main/assets/readme_header_scheduler.png" height="400" />
+</p>
+<p align="center"><b>centrally schedule rustic backups</b></p>
+
+<!-- <p align="center">
+<a href="https://crates.io/crates/rustic-rs"><img src="https://img.shields.io/crates/v/rustic-rs.svg" /></a>
+<a href="https://docs.rs/rustic-rs/"><img src="https://img.shields.io/docsrs/rustic-rs?style=flat&amp;labelColor=1c1d42&amp;color=4f396a&amp;logo=Rust&amp;logoColor=white" /></a>
+<a href="https://raw.githubusercontent.com/rustic-rs/rustic/main/"><img src="https://img.shields.io/badge/license-Apache2.0/MIT-blue.svg" /></a>
+<a href="https://crates.io/crates/rustic-rs"><img src="https://img.shields.io/crates/d/rustic-rs.svg" /></a>
+<p> -->
+
+## About
+
+rustic scheduler is a client/server application to schedule regular backups on
+many clients to one identical repository controlled by a central scheduling
+server.
+
+It allows to define client groups which are all backed up the same way.
+
+**Note that rustic scheduler is in an early development stage. It uses the yet
+not published `rustic_core` from the rustic crate which needs to be in the path
+`../rustic/crates/rustic_core/` in order to compile the applications.**
 
 ## Contact
 
@@ -7,18 +29,6 @@
 | Issue Tracker | [GitHub Issues](https://github.com/rustic-rs/rustic_scheduler/issues)                  |
 | Discord       | [![](https://dcbadge.vercel.app/api/server/WRUWENZnzQ)](https://discord.gg/WRUWENZnzQ) |
 | Discussions   | [GitHub Discussions](https://github.com/rustic-rs/rustic/discussions)                  |
-
-## About
-
-Rustic scheduler is a client/server application to schedule regular backups on
-many clients to the identicall repository controlled by a central scheduling
-server.
-
-It allows to define client groups which are all backuped the same way.
-
-**Note that rustic scheduler is in an early development stage. It uses the yet
-not published `rustic_core` from the rustic crate which needs to be in the path
-`../rustic/crates/rustic_core/` in order to compile the applications.**
 
 ## Getting started
 
@@ -39,9 +49,9 @@ not published `rustic_core` from the rustic crate which needs to be in the path
 
 Not yet.
 
-## Contribution
+## Contributions
 
-Contributions in form of [issues][1] or PRs are very welcome.
+Contributions in form of [issues][4] or PRs are very welcome.
 
 ## License
 
