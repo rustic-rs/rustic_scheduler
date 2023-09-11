@@ -19,16 +19,15 @@ server.
 It allows to define client groups which are all backed up the same way.
 
 **Note that rustic scheduler is in an early development stage. It uses the yet
-not published `rustic_core` from the rustic crate which needs to be in the path
-`../rustic/crates/rustic_core/` in order to compile the applications.**
+not published `rustic_core` from the rustic crate as a git dependency.**
 
 ## Contact
 
-| Contact       | Where?                                                                                 |
-| ------------- | -------------------------------------------------------------------------------------- |
-| Issue Tracker | [GitHub Issues](https://github.com/rustic-rs/rustic_scheduler/issues)                  |
-| Discord       | [![](https://dcbadge.vercel.app/api/server/WRUWENZnzQ)](https://discord.gg/WRUWENZnzQ) |
-| Discussions   | [GitHub Discussions](https://github.com/rustic-rs/rustic/discussions)                  |
+| Contact       | Where?                                                                                        |
+| ------------- | --------------------------------------------------------------------------------------------- |
+| Issue Tracker | [GitHub Issues](https://github.com/rustic-rs/rustic_scheduler/issues)                         |
+| Discord       | [![Discord](https://dcbadge.vercel.app/api/server/WRUWENZnzQ)](https://discord.gg/WRUWENZnzQ) |
+| Discussions   | [GitHub Discussions](https://github.com/rustic-rs/rustic/discussions)                         |
 
 ## Getting started
 
