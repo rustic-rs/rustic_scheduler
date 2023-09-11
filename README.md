@@ -10,6 +10,10 @@
 <a href="https://crates.io/crates/rustic-rs"><img src="https://img.shields.io/crates/d/rustic-rs.svg" /></a>
 <p> -->
 
+<p align="center">
+<a href="https://github.com/rustic-rs/rustic_scheduler/actions/workflows/nightly.yml"><img src="https://github.com/rustic-rs/rustic_scheduler/actions/workflows/nightly.yml/badge.svg" /></a>
+</p>
+
 ## About
 
 rustic scheduler is a client/server application to schedule regular backups on
@@ -50,7 +54,7 @@ not published `rustic_core` from the rustic crate as a git dependency.**
 
 ## Are binaries available?
 
-Not yet.
+Yes, you can find them [here](https://github.com/rustic-rs/nightly).
 
 ## Contributions
 
