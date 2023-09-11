@@ -54,7 +54,7 @@ not published `rustic_core` from the rustic crate as a git dependency.**
 
 ## Are binaries available?
 
-Yes, you can find them [here](https://github.com/rustic-rs/nightly).
+Yes, you can find them [here](https://rustic.cli.rs/docs/nightly_builds.html).
 
 ## Contributions
 
