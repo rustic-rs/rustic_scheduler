@@ -21,11 +21,11 @@ server.
 """
 
 [[bin]]
-name = "server"
+name = "rustic-scheduler-server"
 path = "src/server.rs"
 
 [[bin]]
-name = "client"
+name = "rustic-scheduler-client"
 path = "src/client.rs"
 
 [dependencies]

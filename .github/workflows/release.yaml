@@ -143,7 +143,7 @@ jobs:
               RELEASE_NAME=rustic-scheduler-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.job.target}}.tar.gz 
           fi
 
-          tar czvf $RELEASE_NAME rustic-scheduler${{ matrix.job.binary-postfix }} config/
+          tar czvf $RELEASE_NAME rustic-scheduler-client${{ matrix.job.binary-postfix }} rustic-scheduler-server${{ matrix.job.binary-postfix }} config/
 
           ########## create sha256 ##########
           if [[ ${{ runner.os }} == 'Windows' ]]; then
