@@ -28,6 +28,12 @@ jobs:
           toolchain: stable
           override: true
       - uses: Swatinem/rust-cache@e207df5d269b42b69c8bc5101da26f7d31feddb4 # v2
+
+      # TODO!: Remove cloning rustic_core when released
+      - run: |
+          git clone https://github.com/rustic-rs/rustic.git
+          mv rustic/crates/rustic_core ../rustic_core
+
       - uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1
         with:
           command: check
@@ -61,6 +67,12 @@ jobs:
           components: clippy
           override: true
       - uses: Swatinem/rust-cache@e207df5d269b42b69c8bc5101da26f7d31feddb4 # v2
+
+      # TODO!: Remove cloning rustic_core when released
+      - run: |
+          git clone https://github.com/rustic-rs/rustic.git
+          mv rustic/crates/rustic_core ../rustic_core
+
       - uses: actions-rs/clippy-check@b5b5f21f4797c02da247df37026fcd0a5024aa4d # v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
