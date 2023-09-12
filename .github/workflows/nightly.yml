@@ -191,6 +191,8 @@ jobs:
           GIT_SSH='ssh -i ~/.ssh/id_ed25519 -o UserKnownHostsFile=~/.ssh/known_hosts'
 
           # clone the repo into our working directory
+          # we use --depth 1 to avoid cloning the entire history
+          # and only the main branch to avoid cloning all branches
           GIT_SSH_COMMAND=$GIT_SSH git clone git@github.com:rustic-rs/nightly.git --branch main --single-branch --depth 1 $WORKING_DIR
 
           # ensure destination directory exists
