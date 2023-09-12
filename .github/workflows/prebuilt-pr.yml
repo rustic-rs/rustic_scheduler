@@ -97,7 +97,7 @@ jobs:
           github-ref: ${{ github.ref }}
           sign-release: false
           hash-release: true
-          use-project-version: false # not being used in rustic_server
+          use-project-version: false # not being used in rustic_scheduler
 
   remove-build-label:
     name: Remove build label
