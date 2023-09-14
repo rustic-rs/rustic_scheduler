@@ -1,4 +1,6 @@
 name: Open a release PR
+# check https://release-plz.ieni.dev/docs/github with `workflow_dispatch`
+# check https://github.com/cargo-bins/release-pr for workflow_dispatch stuff
 on:
   workflow_dispatch:
     inputs:
