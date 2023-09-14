@@ -94,7 +94,7 @@ jobs:
           github-ref: ${{ github.ref }}
           sign-release: true
           hash-release: true
-          use-project-version: false # not being used in rustic_server
+          use-project-version: false # not being used in rustic_scheduler
 #
 # TODO!: add publishing to release draft
 # TODO!: include changelog in release draft

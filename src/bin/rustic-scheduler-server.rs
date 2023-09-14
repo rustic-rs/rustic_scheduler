@@ -95,7 +95,7 @@ async fn main() {
                 Some(res) = rx.recv() => {
                     match res {
                         NotifyMessage::BackupResult{client, msg:BackupResultMessage::Ok {snapshot} } => {
-                            println!("backup to {client}, {} finished successfuly. Got snapshot {}", snapshot.paths, snapshot.id);
+                            println!("backup to {client}, {} finished successfully. Got snapshot {}", snapshot.paths, snapshot.id);
                             clients.finish_process(client, Local::now(), SourceBackupStatus::Ok(snapshot.id));
                         }
                         NotifyMessage::BackupResult{client, msg:BackupResultMessage::Error {message} } => {
