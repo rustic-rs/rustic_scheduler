@@ -28,16 +28,23 @@ All notable changes to this project will be documented in this file.
 - Add signature and shallow clones to nightly
 - Declutter and reorganize
 - Add comment about shallow clone
-- Remove lint from ci workflow and keep it separate, replace underscore in workflow file
+- Remove lint from ci workflow and keep it separate, replace underscore in
+  workflow file
 - Update ci to reflect changes and optimizations from rustic_server
 - Fix comment being wrongly attributed
 - Add release CD
-- Fix workflow name for create-binary-artifact action, and check breaking changes package dependent
+- Fix workflow name for create-binary-artifact action, and check breaking
+  changes package dependent
 - Decrease build times on windows
 - Fix github refs
 - Set right package
 - Use bash substring comparison to determine package name from branch
 - Fix woggly github action comparison
+- Add changelog generation
+- Add dev tooling
+- Run git-cliff with latest tag during release
+- Add triaging of issues
+- Run release checks also on release subbranches
 
 ### Refactor
 
