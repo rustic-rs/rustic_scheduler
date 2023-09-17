@@ -31,7 +31,7 @@ path = "src/bin/rustic-scheduler-client.rs"
 [dependencies]
 anyhow = "1"
 axum = { version = "0.6.20", features = ["ws"] }
-chrono = "0.4.30"
+chrono = "0.4.31"
 clap = "4"
 clap_derive = "4.4.2"
 cron = "0.12"
