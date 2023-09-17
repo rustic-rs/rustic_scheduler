@@ -56,9 +56,21 @@ not published `rustic_core` from the rustic crate as a git dependency.**
 
 Yes, you can find them [here](https://rustic.cli.rs/docs/nightly_builds.html).
 
-## Contributions
+## Contributing
 
-Contributions in form of [issues][4] or PRs are very welcome.
+Tried rustic-scheduler and not satisfied? Don't just walk away! You can help:
+
+You can report issues or suggest new features on our
+[Discord server](https://discord.gg/WRUWENZnzQ) or using
+[Github Issues](https://github.com/rustic-rs/rustic_scheduler/issues/new/choose)!
+
+Do you know how to code or got an idea for an improvement? Don't keep it to
+yourself!
+
+- Contribute fixes or new features via a pull requests!
+
+Please make sure, that you read the
+[contribution guide](https://rustic.cli.rs/docs/contributing-to-rustic.html).
 
 ## License
 
@@ -68,5 +80,3 @@ Licensed under either of:
 - [MIT license](./LICENSE-MIT)
 
 at your option.
-
-[4]: https://github.com/rustic-rs/rustic_scheduler/issues/new/choose
