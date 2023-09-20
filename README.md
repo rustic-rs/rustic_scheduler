@@ -22,7 +22,7 @@ server.
 
 It allows to define client groups which are all backed up the same way.
 
-**Note that rustic scheduler is in an early development stage.
+**Note**: rustic scheduler is in an early development stage.
 
 ## Contact
 
