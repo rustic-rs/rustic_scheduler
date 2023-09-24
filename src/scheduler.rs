@@ -1,18 +1,36 @@
-use anyhow::{bail, Result};
+use anyhow::{anyhow, bail, Result};
 use chrono::{DateTime, Local};
 use cron::Schedule;
 use rustic_core::Id;
+use sailfish::TemplateOnce;
 use std::{cmp::Ordering, collections::HashMap, time::Duration};
 
 const MAX_WAIT_TIME: Duration = Duration::from_secs(3600);
 type Time = DateTime<Local>;
 
+#[derive(Debug, TemplateOnce)]
+#[template(path = "client.stpl")]
+pub struct ClientStats {
+    name: String,
+    client: Client,
+    backup_stats: BackupStats,
+}
+
+#[derive(Debug, Clone)]
+pub struct BackupStats {
+    ok: usize,
+    missed: usize,
+    error: usize,
+}
+
+#[derive(Debug, Clone)]
 pub enum ClientState {
     NotConnected,
     Idle,
     Processing(Time),
 }
 
+#[derive(Debug, Clone)]
 pub struct Client {
     state: ClientState,
     sources: Vec<Source>, // ordered by next_invocation!
@@ -62,7 +80,8 @@ impl Client {
         let source = &mut self.sources[0];
         source.history.push(SourceBackup {
             scheduled: source.next_invocation.unwrap(),
-            real: time,
+            started: time,
+            finished: time,
             status: SourceBackupStatus::NotConnected,
         });
         source.update_invocation(time);
@@ -76,7 +95,8 @@ impl Client {
             source.last_success = source.next_invocation;
             source.history.push(SourceBackup {
                 scheduled: source.next_invocation.unwrap(),
-                real: start_time,
+                started: start_time,
+                finished: time,
                 status,
             });
             self.state = ClientState::Idle;
@@ -100,6 +120,29 @@ impl Client {
         self.sources.push(source);
         self.sort_sources();
     }
+
+    pub fn stats(&self, name: String) -> ClientStats {
+        let history = || self.sources.iter().flat_map(|s| &s.history);
+        let ok = history()
+            .filter(|h| matches!(h.status, SourceBackupStatus::Ok(_)))
+            .count();
+        let not_connected = history()
+            .filter(|h| matches!(h.status, SourceBackupStatus::NotConnected))
+            .count();
+        let error = history()
+            .filter(|h| matches!(h.status, SourceBackupStatus::Error(_)))
+            .count();
+        let backup_stats = BackupStats {
+            ok,
+            missed: not_connected,
+            error,
+        };
+        ClientStats {
+            name,
+            client: self.clone(),
+            backup_stats,
+        }
+    }
 }
 
 impl Default for Client {
@@ -108,6 +151,7 @@ impl Default for Client {
     }
 }
 
+#[derive(Debug, Clone)]
 pub struct Source {
     source: String,
     schedule: Schedule,
@@ -117,12 +161,15 @@ pub struct Source {
 }
 
 #[allow(dead_code)]
+#[derive(Debug, Clone)]
 pub struct SourceBackup {
     scheduled: Time,
-    real: Time,
+    started: Time,
+    finished: Time,
     status: SourceBackupStatus,
 }
 
+#[derive(Debug, Clone)]
 pub enum SourceBackupStatus {
     Ok(Id),
     Error(String),
@@ -259,6 +306,14 @@ impl Clients {
             client.disconnect()
         }
         self.compute_next_action();
+    }
+
+    pub fn client_stats(&self, client: String) -> Result<ClientStats> {
+        let cli = self
+            .clients
+            .get(&client)
+            .ok_or_else(|| anyhow! {"client {client} doesn't exist"})?;
+        Ok(cli.stats(client))
     }
 }
 
