@@ -47,9 +47,11 @@ It allows to define client groups which are all backed up the same way.
   the config.
 - On each client, run `rustic-scheduler-client <ADDR>`, where `<ADDR>` is the
   websocket address to connect, e.g.
-  `rustic-scheduler-client http://server.localdomain:3012/ws`.
+  `rustic-scheduler-client ws://server.localdomain:3012/ws`.
 - Backups on your clients are automatically started based on the configured
   schedule(s).
+- Statistics for a specific clients are available under `/client/%client`, e.g.
+  `http://server.localdomain:3012/client/my_server1`
 
 ## Are binaries available?
 

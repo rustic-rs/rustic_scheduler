@@ -1,25 +1,27 @@
 use std::{collections::HashMap, fs::read_to_string, time::Duration};
 
+use anyhow::Result;
 use axum::{
     extract::{
         ws::{WebSocket, WebSocketUpgrade},
-        State,
+        Path, State,
     },
-    response::Response,
+    response::{Html, Response},
     routing::get,
     Router,
 };
 use chrono::Local;
 use log::warn;
+use sailfish::TemplateOnce;
 use tokio::{
     spawn,
-    sync::mpsc::{self, Sender},
+    sync::{mpsc, oneshot},
     time::sleep,
 };
 
 use rustic_scheduler::config::{AllBackupOptions, ConfigFile};
 use rustic_scheduler::message::{BackupMessage, BackupResultMessage, HandshakeMessage};
-use rustic_scheduler::scheduler::{Client, Clients, Source, SourceBackupStatus};
+use rustic_scheduler::scheduler::{Client, ClientStats, Clients, Source, SourceBackupStatus};
 
 enum ClientMessage {
     Backup { client: String, msg: BackupMessage },
@@ -28,7 +30,7 @@ enum ClientMessage {
 enum NotifyMessage {
     Connect {
         client: String,
-        channel: Sender<ClientMessage>,
+        channel: mpsc::Sender<ClientMessage>,
     },
     Disconnect {
         client: String,
@@ -36,6 +38,10 @@ enum NotifyMessage {
     BackupResult {
         client: String,
         msg: BackupResultMessage,
+    },
+    StatsRequest {
+        client: String,
+        channel: oneshot::Sender<Result<ClientStats>>,
     },
 }
 
@@ -69,7 +75,7 @@ async fn main() {
 
     // The backup loop handling the schedules
     spawn(async move {
-        let mut client_channels: HashMap<String, Sender<ClientMessage>> = HashMap::new();
+        let mut client_channels: HashMap<String, mpsc::Sender<ClientMessage>> = HashMap::new();
         let sleep_timer = sleep(Duration::ZERO);
         tokio::pin!(sleep_timer);
 
@@ -116,6 +122,9 @@ async fn main() {
                             client_channels.remove(&client);
                             clients.disconnect_client(client);
                         }
+                        NotifyMessage::StatsRequest{client, channel} => {
+                            channel.send(clients.client_stats(client)).unwrap();
+                        }
                     }
                 }
             }
@@ -131,9 +140,9 @@ async fn main() {
 
     // build our application with a single route
     let app = Router::new()
-        .route("/ws", get(handler))
-        .with_state(wtx)
-        .route("/", get(|| async { "Hello, World!" }));
+        .route("/ws", get(ws_handler))
+        .route("/client/:client", get(client_handler))
+        .with_state(wtx);
 
     // run it with hyper on localhost:3012
     axum::Server::bind(&config.global.address.parse().unwrap())
@@ -142,11 +151,31 @@ async fn main() {
         .unwrap();
 }
 
-async fn handler(ws: WebSocketUpgrade, State(state): State<Sender<NotifyMessage>>) -> Response {
-    ws.on_upgrade(|socket| handle_socket(socket, state))
+async fn client_handler(
+    Path(client): Path<String>,
+    State(wtx): State<mpsc::Sender<NotifyMessage>>,
+) -> Html<String> {
+    let (tx, wrx) = oneshot::channel();
+
+    wtx.send(NotifyMessage::StatsRequest {
+        client,
+        channel: tx,
+    })
+    .await
+    .unwrap();
+
+    let stats = wrx.await.unwrap().unwrap();
+    Html(stats.render_once().unwrap())
 }
 
-async fn handle_socket(mut socket: WebSocket, wtx: Sender<NotifyMessage>) {
+async fn ws_handler(
+    ws: WebSocketUpgrade,
+    State(wtx): State<mpsc::Sender<NotifyMessage>>,
+) -> Response {
+    ws.on_upgrade(|socket| handle_socket(socket, wtx))
+}
+
+async fn handle_socket(mut socket: WebSocket, wtx: mpsc::Sender<NotifyMessage>) {
     let (tx, mut wrx) = mpsc::channel(1);
 
     // handshake
