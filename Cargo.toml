@@ -33,7 +33,7 @@ anyhow = "1"
 axum = { version = "0.6.20", features = ["ws"] }
 chrono = "0.4.31"
 clap = "4"
-clap_derive = "4.4.2"
+clap_derive = "4.4.7"
 cron = "0.12"
 env_logger = "0.10"
 gethostname = "0.4.3"
