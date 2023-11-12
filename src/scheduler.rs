@@ -202,7 +202,7 @@ impl NextAction {
             match self.0 {
                 Some((_, cur_date)) if date >= cur_date => {}
                 _ => {
-                    self.0 = Some((name.clone().to_owned(), date));
+                    self.0 = Some((name.to_owned(), date));
                 }
             }
         }
