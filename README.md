@@ -41,7 +41,7 @@ It allows to define client groups which are all backed up the same way.
 - Copy the `rustic-scheduler-server` binary to your backup schedule server and
   the `rustic-scheduler-client` binary to all your clients (available under
   `/targets/release`).
-- Create a config file `rustic_schedulder.toml` on your backup schedule server
+- Create a config file `./config/rustic_schedulder.toml` on your backup schedule server
   (example config is available in the `config/` dir)
 - Run the `rustic-scheduler-server` binary on your server in the dir containing
   the config.

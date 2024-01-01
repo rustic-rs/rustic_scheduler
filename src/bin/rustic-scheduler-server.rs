@@ -1,5 +1,4 @@
 use std::{collections::HashMap, fs::read_to_string, time::Duration};
-
 use anyhow::Result;
 use axum::{
     extract::{
@@ -15,6 +14,7 @@ use log::warn;
 use sailfish::TemplateOnce;
 use tokio::{
     spawn,
+    net::TcpListener,
     sync::{mpsc, oneshot},
     time::sleep,
 };
@@ -47,7 +47,8 @@ enum NotifyMessage {
 
 #[tokio::main]
 async fn main() {
-    let config = read_to_string("rustic_scheduler.toml").unwrap();
+    // FIXME: Unhardcode config file and expose via CLI settings
+    let config = read_to_string("./config/rustic_scheduler.toml").unwrap();
     let config: ConfigFile = toml::from_str(&config).unwrap();
     config.validate().unwrap();
 
@@ -145,8 +146,13 @@ async fn main() {
         .with_state(wtx);
 
     // run it with hyper on localhost:3012
-    axum::Server::bind(&config.global.address.parse().unwrap())
-        .serve(app.into_make_service())
+    let listener = TcpListener::bind(&config.global.address)
+        .await
+        .unwrap();
+    
+    println!("Listening on http://{}", config.global.address);
+
+    axum::serve(listener, app.into_make_service())
         .await
         .unwrap();
 }
