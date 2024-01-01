@@ -1,4 +1,3 @@
-use std::{collections::HashMap, fs::read_to_string, time::Duration};
 use anyhow::Result;
 use axum::{
     extract::{
@@ -12,9 +11,10 @@ use axum::{
 use chrono::Local;
 use log::warn;
 use sailfish::TemplateOnce;
+use std::{collections::HashMap, fs::read_to_string, time::Duration};
 use tokio::{
-    spawn,
     net::TcpListener,
+    spawn,
     sync::{mpsc, oneshot},
     time::sleep,
 };
@@ -146,10 +146,8 @@ async fn main() {
         .with_state(wtx);
 
     // run it with hyper on localhost:3012
-    let listener = TcpListener::bind(&config.global.address)
-        .await
-        .unwrap();
-    
+    let listener = TcpListener::bind(&config.global.address).await.unwrap();
+
     println!("Listening on http://{}", config.global.address);
 
     axum::serve(listener, app.into_make_service())
