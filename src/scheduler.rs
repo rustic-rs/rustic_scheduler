@@ -63,7 +63,7 @@ impl Client {
     fn next_invocation(&self) -> Option<Time> {
         match self.state {
             ClientState::Idle | ClientState::NotConnected => {
-                self.sources.get(0).and_then(|s| s.next_invocation)
+                self.sources.first().and_then(|s| s.next_invocation)
             }
             ClientState::Processing(_) => None,
         }
