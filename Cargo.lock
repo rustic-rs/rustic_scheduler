@@ -1894,6 +1894,7 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "serde_with",
+ "sha2",
  "tokio",
  "toml",
  "tungstenite 0.21.0",
