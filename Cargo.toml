@@ -1,6 +1,6 @@
 [package]
 name = "rustic_scheduler"
-version = "0.1.0"
+version = "0.1.1"
 categories = ["command-line-utilities"]
 edition = "2021"
 homepage = "https://rustic.cli.rs/"
