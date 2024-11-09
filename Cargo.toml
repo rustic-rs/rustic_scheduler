@@ -19,6 +19,12 @@ many clients to one identical repository controlled by a central scheduling
 server.
 """
 
+[package.metadata.wix]
+upgrade-guid = "C23C558D-97A1-454A-8B23-DA1368EE51A0"
+path-guid = "D3BCB70C-354E-405C-A25E-431453E4CB58"
+license = false
+eula = false
+
 [[bin]]
 name = "rustic-scheduler-server"
 path = "src/bin/rustic-scheduler-server.rs"
@@ -96,3 +102,8 @@ rpath = false
 lto = true
 debug-assertions = false
 codegen-units = 1
+
+# The profile that 'dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
