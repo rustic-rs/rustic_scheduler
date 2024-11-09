@@ -31,12 +31,13 @@ jobs:
             architecture: x86_64
             binary-postfix: ".exe"
             use-cross: false
-          - os: ubuntu-latest
-            os-name: windows
-            target: x86_64-pc-windows-gnu
-            architecture: x86_64
-            binary-postfix: ".exe"
-            use-cross: true
+          # FIXME: cross-compilation is not working on windows, due to sha2 dependency
+          # - os: windows-latest
+          #   os-name: windows
+          #   target: x86_64-pc-windows-gnu
+          #   architecture: x86_64
+          #   binary-postfix: ".exe"
+          #   use-cross: true
           - os: macos-13
             os-name: macos
             target: x86_64-apple-darwin
