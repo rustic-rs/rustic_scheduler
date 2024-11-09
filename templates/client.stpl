@@ -1,10 +1,10 @@
 <html>
 <body>
-<h1><%= name %></h1>
-<p>State: <%= client.state | dbg %></p>
-<p>Backups: <%= backup_stats.ok %> ok, <%= backup_stats.missed %> missed, <%= backup_stats.error %> errors</p>
+<h1><%= self.name %></h1>
+<p>State: <%= self.client.state | dbg %></p>
+<p>Backups: <%= self.backup_stats.ok %> ok, <%= self.backup_stats.missed %> missed, <%= self.backup_stats.error %> errors</p>
 <h2>Sources</h2>
-<% for src in client.sources { %>
+<% for src in self.client.sources { %>
 <h3><%= src.source %></h3>
 <p>Schedule: <%= src.schedule | disp %></p>
 <h4>History</h4>
