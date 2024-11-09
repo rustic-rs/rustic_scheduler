@@ -49,10 +49,10 @@ toml = "0.8.19"
 tungstenite = "0.21"
 url = "2.5"
 
-[target.'cfg(any(not(windows), target_env = "gnu"))'.dependencies]
+[target.'cfg(not(windows))'.dependencies]
 sha2 = { version = "0.10.8", features = ["asm"] }
 
-[target.'cfg(all(windows, not(target_env = "gnu")))'.dependencies]
+[target.'cfg(windows)'.dependencies]
 # unfortunately, the asm extensions do not build on Windows, see https://github.com/RustCrypto/asm-hashes/issues/17
 # and https://github.com/RustCrypto/asm-hashes/pull/issues/78
 sha2 = "0.10.8"
