@@ -23,7 +23,6 @@
 # dependencies not shared by any other crates, would be ignored, as the target
 # list here is effectively saying which targets you are building for.
 targets = [
-
   # The triple can be any string, but only the target triples built in to
   # rustc (as of 1.40) can be checked against actual config expressions
   # "x86_64-unknown-linux-musl",
@@ -65,13 +64,12 @@ feature-depth = 1
 # https://embarkstudios.github.io/cargo-deny/checks/advisories/cfg.html
 [advisories]
 # The path where the advisory databases are cloned/fetched into
-db-path = "$CARGO_HOME/advisory-dbs"
+# db-path = "$CARGO_HOME/advisory-dbs"
 # The url(s) of the advisory databases to use
-db-urls = ["https://github.com/rustsec/advisory-db"]
+# db-urls = ["https://github.com/rustsec/advisory-db"]
 # A list of advisory IDs to ignore. Note that ignored advisories will still
 # output a note when they are encountered.
 ignore = [
-
   # "RUSTSEC-0000-0000",
   # { id = "RUSTSEC-0000-0000", reason = "you can specify a reason the advisory is ignored" },
   # "a-crate-that-is-yanked@0.1.1", # you can also ignore yanked crate versions if you wish
@@ -95,10 +93,10 @@ allow = [
   "Apache-2.0",
   "Apache-2.0 WITH LLVM-exception",
   "ISC",
-  "Unicode-DFS-2016",
   "BSD-3-Clause",
-  "MPL-2.0",
+  "Unicode-DFS-2016",
   "OpenSSL",
+  "MPL-2.0",
 ]
 # The confidence threshold for detecting a license from license text.
 # The higher the value, the more closely the license text must be to the
@@ -108,7 +106,6 @@ confidence-threshold = 0.8
 # Allow 1 or more licenses on a per-crate basis, so that particular licenses
 # aren't accepted for every possible crate as with the normal allow list
 exceptions = [
-
   # Each entry is the crate and version constraint, and its specific allow
   # list
   # { allow = ["Zlib"], crate = "adler32" },
@@ -142,7 +139,6 @@ ignore = false
 # is only published to private registries, and ignore is true, the crate will
 # not have its license(s) checked
 registries = [
-
   # "https://sekretz.com/registry
 ]
 
@@ -170,13 +166,11 @@ workspace-default-features = "allow"
 external-default-features = "allow"
 # List of crates that are allowed. Use with care!
 allow = [
-
   # "ansi_term@0.11.0",
   # { crate = "ansi_term@0.11.0", reason = "you can specify a reason it is allowed" },
 ]
 # List of crates to deny
 deny = [
-
   # "ansi_term@0.11.0",
   # { crate = "ansi_term@0.11.0", reason = "you can specify a reason it is banned" },
   # Wrapper crates can optionally be specified to allow the crate when it
@@ -209,7 +203,6 @@ deny = [
 
 # Certain crates/versions that will be skipped when doing duplicate detection.
 skip = [
-
   # "ansi_term@0.11.0",
   # { crate = "ansi_term@0.11.0", reason = "you can specify a reason why it can't be updated/removed" },
 ]
@@ -218,7 +211,6 @@ skip = [
 # dependencies starting at the specified crate, up to a certain depth, which is
 # by default infinite.
 skip-tree = [
-
   # "ansi_term@0.11.0", # will be skipped along with _all_ of its direct and transitive dependencies
   # { crate = "ansi_term@0.11.0", depth = 20 },
 ]
@@ -241,7 +233,7 @@ allow-git = []
 
 [sources.allow-org]
 # github.com organizations to allow git sources for
-github = ["rustic-rs"]
+github = []
 # gitlab.com organizations to allow git sources for
 gitlab = []
 # bitbucket.org organizations to allow git sources for
