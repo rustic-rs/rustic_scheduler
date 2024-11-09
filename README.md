@@ -3,7 +3,7 @@
 </p>
 <p align="center"><b>centrally schedule rustic backups</b></p>
 <p align="center">
-<a href="https://crates.io/crates/rustic_scheduler_"><img src="https://img.shields.io/crates/v/rustic_scheduler.svg" /></a>
+<a href="https://crates.io/crates/rustic_scheduler"><img src="https://img.shields.io/crates/v/rustic_scheduler.svg" /></a>
 <a href="https://docs.rs/rustic_scheduler/"><img src="https://img.shields.io/docsrs/rustic_scheduler?style=flat&amp;labelColor=1c1d42&amp;color=4f396a&amp;logo=Rust&amp;logoColor=white" /></a>
 <a href="https://raw.githubusercontent.com/rustic-rs/rustic_scheduler/main/"><img src="https://img.shields.io/badge/license-Apache2.0/MIT-blue.svg" /></a>
 <a href="https://crates.io/crates/rustic_scheduler"><img src="https://img.shields.io/crates/d/rustic_scheduler.svg" /></a>
