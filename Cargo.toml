@@ -1,14 +1,13 @@
 [package]
 name = "rustic_scheduler"
 version = "0.1.1"
+authors = ["the rustic-rs team"]
 categories = ["command-line-utilities"]
 edition = "2021"
 homepage = "https://rustic.cli.rs/"
 keywords = [
   "backup",
   "restic",
-  "deduplication",
-  "encryption",
   "cli",
   "scheduler",
 ]
