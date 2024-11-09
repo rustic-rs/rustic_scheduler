@@ -73,11 +73,12 @@ jobs:
             target: i686-unknown-linux-gnu
             architecture: i686
             use-cross: true
-          - os: ubuntu-latest
-            os-name: netbsd
-            target: x86_64-unknown-netbsd
-            architecture: x86_64
-            use-cross: true
+          # FIXME: Doesn't build, due to cannot find -lexecinfo
+          # - os: ubuntu-latest
+          #   os-name: netbsd
+          #   target: x86_64-unknown-netbsd
+          #   architecture: x86_64
+          #   use-cross: true
           - os: ubuntu-latest
             os-name: linux
             target: armv7-unknown-linux-gnueabihf
