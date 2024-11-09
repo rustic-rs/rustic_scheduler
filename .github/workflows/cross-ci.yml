@@ -36,11 +36,12 @@ jobs:
             target: x86_64-pc-windows-msvc
             architecture: x86_64
             use-cross: false
-          - os: windows-latest
-            os-name: windows
-            target: x86_64-pc-windows-gnu
-            architecture: x86_64
-            use-cross: false
+          # FIXME: sha2 fails to build on Windows with GNU toolchain
+          # - os: windows-latest
+          #   os-name: windows
+          #   target: x86_64-pc-windows-gnu
+          #   architecture: x86_64
+          #   use-cross: false
           - os: macos-13
             os-name: macos
             target: x86_64-apple-darwin
