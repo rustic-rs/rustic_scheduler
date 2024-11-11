@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+## [0.1.3](https://github.com/rustic-rs/rustic_scheduler/compare/v0.1.2...v0.1.3) - 2024-11-11
+
+### Other
+
+- add installation instructions for default feature on x86_64-unknown-linux-musl
+- *(release)* disable git releases, as cargo-dist does it
+
 ## [0.1.2](https://github.com/rustic-rs/rustic_scheduler/compare/v0.1.1...v0.1.2) - 2024-11-09
 
 ### Other
