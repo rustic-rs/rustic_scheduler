@@ -24,10 +24,10 @@ use tokio::{
 };
 
 use crate::{
-    config::{AllBackupOptions, RusticSchedulerConfig},
+    config::AllBackupOptions,
     message::{BackupMessage, BackupResultMessage, ClientMessage, HandshakeMessage, NotifyMessage},
     prelude::RUSTIC_SCHEDULER_APP,
-    scheduler::{Client, ClientStats, Clients, Source, SourceBackupStatus},
+    scheduler::{Client, Clients, Source, SourceBackupStatus},
 };
 
 /// `server` subcommand

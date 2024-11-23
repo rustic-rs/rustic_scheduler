@@ -17,7 +17,7 @@ use crate::{
     commands::{client::ClientCmd, server::ServerCmd},
     config::RusticSchedulerConfig,
 };
-use abscissa_core::{config::Override, Command, Configurable, FrameworkError, Runnable};
+use abscissa_core::{Command, Configurable, FrameworkError, Runnable};
 use std::path::PathBuf;
 
 /// RusticScheduler Configuration Filename
