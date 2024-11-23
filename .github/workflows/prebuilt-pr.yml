@@ -32,7 +32,7 @@ jobs:
             architecture: x86_64
             binary-postfix: ".exe"
             use-cross: false
-          # FIXME: cross-compilation is not working on windows, due to sha2 dependency
+          # FIXME: cross-compilation is not working on windows, due to `sha2` and `aws-ls-sys` dependency
           # - os: windows-latest
           #   os-name: windows
           #   target: x86_64-pc-windows-gnu
@@ -82,12 +82,13 @@ jobs:
           #   architecture: x86_64
           #   binary-postfix: ""
           #   use-cross: true
-          - os: ubuntu-latest
-            os-name: linux
-            target: armv7-unknown-linux-gnueabihf
-            architecture: armv7
-            binary-postfix: ""
-            use-cross: true
+          # FIXME: Doesn't cross-compile, due to `aws-ls-sys` dependency
+          # - os: ubuntu-latest
+          #   os-name: linux
+          #   target: armv7-unknown-linux-gnueabihf
+          #   architecture: armv7
+          #   binary-postfix: ""
+          #   use-cross: true
 
     steps:
       - name: Checkout repository
