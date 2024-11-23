@@ -168,7 +168,7 @@ pub struct SourceBackup {
     finished: Time,
     status: SourceBackupStatus,
 }
-
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub enum SourceBackupStatus {
     Ok(Id),
