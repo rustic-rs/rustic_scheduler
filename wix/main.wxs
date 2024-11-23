@@ -126,17 +126,9 @@ server.
                         <Component Id='binary0' Guid='*'>
                             <File
                                 Id='exe0'
-                                Name='rustic-scheduler-client.exe'
+                                Name='rustic-scheduler.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\rustic-scheduler-client.exe'
-                                KeyPath='yes'/>
-                        </Component>
-                        <Component Id='binary1' Guid='*'>
-                            <File
-                                Id='exe1'
-                                Name='rustic-scheduler-server.exe'
-                                DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\rustic-scheduler-server.exe'
+                                Source='$(var.CargoTargetBinDir)\rustic-scheduler.exe'
                                 KeyPath='yes'/>
                         </Component>
                     </Directory>
@@ -161,7 +153,6 @@ server.
             <!--<ComponentRef Id='License'/>-->
 
             <ComponentRef Id='binary0'/>
-            <ComponentRef Id='binary1'/>
 
             <Feature
                 Id='Environment'
