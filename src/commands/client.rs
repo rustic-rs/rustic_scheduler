@@ -1,42 +1,78 @@
+//! `client` subcommand
 use std::thread::sleep;
 use std::time::Duration;
 
+use abscissa_core::{
+    config::Override, status_err, Application, Command, FrameworkError, Runnable, Shutdown,
+};
 use anyhow::Result;
 use clap::Parser;
 use gethostname::gethostname;
 use log::{info, warn};
-use rustic_core::{repofile::SnapshotFile, PathList, Repository};
 use tungstenite::{connect, Message};
 use url::Url;
 
-use rustic_scheduler::message::{BackupMessage, BackupResultMessage, HandshakeMessage};
+use rustic_core::{repofile::SnapshotFile, PathList, Repository};
 
-#[derive(clap_derive::Parser)]
-#[command(author, version, about, long_about = None)]
-struct Opts {
-    #[clap(long)]
+use crate::{
+    config::RusticSchedulerConfig,
+    message::{BackupMessage, BackupResultMessage, HandshakeMessage},
+    prelude::RUSTIC_SCHEDULER_APP,
+};
+
+/// `client` subcommand
+///
+/// The `Parser` proc macro generates an option parser based on the struct
+/// definition, and is defined in the `clap` crate. See their documentation
+/// for a more comprehensive example:
+///
+/// <https://docs.rs/clap/>
+#[derive(Command, Debug, Parser)]
+pub struct ClientCmd {
     /// Set client name. Default: hostname
+    #[clap(short)]
     name: Option<String>,
 
     /// Server websocket URL to connect to, e.g. ws://host:3012/ws
+    #[clap(long)]
     server: Url,
 }
 
-fn main() {
-    env_logger::init();
-    let opts = Opts::parse();
-    let name = opts
-        .name
-        .unwrap_or_else(|| gethostname().to_string_lossy().to_string());
+impl Override<RusticSchedulerConfig> for ClientCmd {
+    fn override_config(
+        &self,
+        config: RusticSchedulerConfig,
+    ) -> std::result::Result<RusticSchedulerConfig, FrameworkError> {
+        // TODO - override config with CLI settings
 
-    // TODO: retry with backoff
-    loop {
-        if let Err(err) = connect_client(opts.server.clone(), name.clone()) {
-            eprintln!("{err}");
-            warn!("error {err}, retrying...");
-            // retry conneting after 5s
-            sleep(Duration::from_secs(5));
-        }
+        Ok(config)
+    }
+}
+
+impl Runnable for ClientCmd {
+    /// Start the application.
+    fn run(&self) {
+        let res = || -> Result<()> {
+            let name = self
+                .name
+                .clone()
+                .unwrap_or_else(|| gethostname().to_string_lossy().to_string());
+
+            // TODO: retry with backoff
+            loop {
+                if let Err(err) = connect_client(self.server.clone(), name.clone()) {
+                    eprintln!("{err}");
+                    warn!("error {err}, retrying...");
+                    // retry conneting after 5s
+                    sleep(Duration::from_secs(5));
+                }
+            }
+        };
+
+        if let Err(err) = res() {
+            status_err!("{}", err);
+            RUSTIC_SCHEDULER_APP.shutdown(Shutdown::Crash);
+        };
     }
 }
 

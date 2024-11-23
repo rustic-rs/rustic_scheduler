@@ -1,7 +1,8 @@
+use crate::{config::AllRepositoryOptions, scheduler::ClientStats};
+use anyhow::Result;
 use rustic_core::{repofile::SnapshotFile, BackupOptions, SnapshotOptions};
 use serde::{Deserialize, Serialize};
-
-use crate::config::AllRepositoryOptions;
+use tokio::sync::{mpsc, oneshot};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct HandshakeMessage {
@@ -28,4 +29,26 @@ pub struct BackupMessage {
 pub enum BackupResultMessage {
     Ok { snapshot: Box<SnapshotFile> },
     Error { message: String },
+}
+
+pub(crate) enum ClientMessage {
+    Backup { client: String, msg: BackupMessage },
+}
+
+pub(crate) enum NotifyMessage {
+    Connect {
+        client: String,
+        channel: mpsc::Sender<ClientMessage>,
+    },
+    Disconnect {
+        client: String,
+    },
+    BackupResult {
+        client: String,
+        msg: BackupResultMessage,
+    },
+    StatsRequest {
+        client: String,
+        channel: oneshot::Sender<Result<ClientStats>>,
+    },
 }
