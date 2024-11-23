@@ -35,7 +35,7 @@ pub struct ClientCmd {
 
     /// Server websocket URL to connect to, e.g. ws://host:3012/ws
     #[clap(long)]
-    server: Url,
+    url: Url,
 }
 
 impl Override<RusticSchedulerConfig> for ClientCmd {
@@ -60,7 +60,7 @@ impl Runnable for ClientCmd {
 
             // TODO: retry with backoff
             loop {
-                if let Err(err) = connect_client(self.server.clone(), name.clone()) {
+                if let Err(err) = connect_client(self.url.clone(), name.clone()) {
                     eprintln!("{err}");
                     warn!("error {err}, retrying...");
                     // retry conneting after 5s

@@ -30,30 +30,29 @@ It allows to define client groups which are all backed up the same way.
 | Discord       | [![Discord](https://dcbadge.vercel.app/api/server/WRUWENZnzQ)](https://discord.gg/WRUWENZnzQ) |
 | Discussions   | [GitHub Discussions](https://github.com/rustic-rs/rustic/discussions)                         |
 
+### Installation
+
+Copy the `rustic-scheduler` binary to your backup schedule server and to all
+your clients. You can download the latest version from the
+[releases page](https://github.com/rustic-rs/rustic_scheduler/releases)
+
 ## Getting started
 
-- Install Rust, e.g. using rustup.
-- Clone this github repository and the rustic repository.
-- Compile the `rustic-scheduler` server and client using
-  `cargo build --release --bins`
-- Copy the `rustic-scheduler-server` binary to your backup schedule server and
-  the `rustic-scheduler-client` binary to all your clients (available under
-  `/targets/release`).
 - Create a config file `./config/rustic_scheduler.toml` on your backup schedule
   server (example config is available in the `config/` dir)
-- Run the `rustic-scheduler-server` binary on your server in the dir containing
-  the config.
-- On each client, run `rustic-scheduler-client <ADDR>`, where `<ADDR>` is the
-  websocket address to connect, e.g.
-  `rustic-scheduler-client ws://server.localdomain:3012/ws`.
+
+- Run the `rustic-scheduler` binary on your server in the dir containing the
+  config.
+
+- On each client, run `rustic-scheduler client --url <ADDR>`, where `<ADDR>` is
+  the websocket address to connect, e.g.
+  `rustic-scheduler client --url ws://server.localdomain:3012/ws`.
+
 - Backups on your clients are automatically started based on the configured
   schedule(s).
+
 - Statistics for a specific clients are available under `/client/%client`, e.g.
-  `http://server.localdomain:3012/client/my_server1`
-
-## Are binaries available?
-
-Yes, you can find them [here](https://rustic.cli.rs/docs/nightly_builds.html).
+  `http://server.localdomain:3012/client/my_server1`.
 
 ## Contributing
 
