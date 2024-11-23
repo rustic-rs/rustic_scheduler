@@ -19,9 +19,11 @@ use tokio::{
     time::sleep,
 };
 
-use rustic_scheduler::config::{AllBackupOptions, ConfigFile};
-use rustic_scheduler::message::{BackupMessage, BackupResultMessage, HandshakeMessage};
-use rustic_scheduler::scheduler::{Client, ClientStats, Clients, Source, SourceBackupStatus};
+use rustic_scheduler::{
+    config::{AllBackupOptions, ConfigFile},
+    message::{BackupMessage, BackupResultMessage, HandshakeMessage},
+    scheduler::{Client, ClientStats, Clients, Source, SourceBackupStatus},
+};
 
 enum ClientMessage {
     Backup { client: String, msg: BackupMessage },
@@ -85,11 +87,13 @@ async fn main() {
                 _ = &mut sleep_timer => {
                     if let Some((client, source)) = clients.process_next(Local::now()) {
                         let repo_opts = config.repository.clone();
+
                         let AllBackupOptions {
                             backup_opts,
                             snapshot_opts,
                         } = config.options[&options_mapper[&(client.clone(), source.clone())]]
                             .clone();
+
                         let msg = BackupMessage {
                             repo_opts,
                             backup_opts,
@@ -103,7 +107,7 @@ async fn main() {
                     match res {
                         NotifyMessage::BackupResult{client, msg:BackupResultMessage::Ok {snapshot} } => {
                             println!("backup to {client}, {} finished successfully. Got snapshot {}", snapshot.paths, snapshot.id);
-                            clients.finish_process(client, Local::now(), SourceBackupStatus::Ok(snapshot.id));
+                            clients.finish_process(client, Local::now(), SourceBackupStatus::Ok(*snapshot.id));
                         }
                         NotifyMessage::BackupResult{client, msg:BackupResultMessage::Error {message} } => {
                             println!("backup to {client} failed: {}", message);

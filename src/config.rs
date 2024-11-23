@@ -2,8 +2,9 @@ use std::collections::HashMap;
 
 use anyhow::{bail, Result};
 use cron::Schedule;
+use rustic_backend::BackendOptions;
 use rustic_core::{BackupOptions, RepositoryOptions, SnapshotOptions};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use serde_with::{serde_as, DisplayFromStr};
 
 #[derive(Clone, Deserialize)]
@@ -32,11 +33,19 @@ pub struct AllBackupOptions {
     pub snapshot_opts: SnapshotOptions,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AllRepositoryOptions {
+    #[serde(flatten)]
+    pub be: BackendOptions,
+    #[serde(flatten)]
+    pub repo: RepositoryOptions,
+}
+
 #[serde_as]
 #[derive(Clone, Deserialize)]
 pub struct ConfigFile {
     pub global: GlobalOptions,
-    pub repository: RepositoryOptions,
+    pub repository: AllRepositoryOptions,
     pub clientgroup: HashMap<String, ClientGroupOptions>,
     #[serde_as(as = "HashMap<_,DisplayFromStr>")]
     pub schedules: HashMap<String, Schedule>,

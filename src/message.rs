@@ -1,5 +1,7 @@
-use rustic_core::{repofile::SnapshotFile, BackupOptions, RepositoryOptions, SnapshotOptions};
+use rustic_core::{repofile::SnapshotFile, BackupOptions, SnapshotOptions};
 use serde::{Deserialize, Serialize};
+
+use crate::config::AllRepositoryOptions;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct HandshakeMessage {
@@ -15,7 +17,7 @@ pub enum HandshakeResultMessage {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct BackupMessage {
-    pub repo_opts: RepositoryOptions,
+    pub repo_opts: AllRepositoryOptions,
     pub backup_opts: BackupOptions,
     pub snapshot_opts: SnapshotOptions,
     pub source: String,

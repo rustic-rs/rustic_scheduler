@@ -41,7 +41,7 @@ fn main() {
 }
 
 fn connect_client(server: Url, name: String) -> Result<()> {
-    let (mut socket, _) = connect(server)?;
+    let (mut socket, _) = connect(server.as_str())?;
 
     info!("Connected to the server");
     println!("Connected to the server");
@@ -80,12 +80,19 @@ fn connect_client(server: Url, name: String) -> Result<()> {
 }
 
 fn do_backup(message: BackupMessage) -> Result<SnapshotFile> {
-    let repo = Repository::new(&message.repo_opts)?
+    let backends = message.repo_opts.be.to_backends()?;
+
+    let repo_opts = message.repo_opts.repo;
+
+    let repo = Repository::new(&repo_opts, &backends)?
         .open()?
         .to_indexed_ids()?;
+
     let source = PathList::from_string(&message.source)?.sanitize()?;
+
     let snap = message.snapshot_opts.to_snapshot()?;
 
-    let snap = repo.backup(&message.backup_opts, source, snap)?;
+    let snap = repo.backup(&message.backup_opts, &source, snap)?;
+
     Ok(snap)
 }
