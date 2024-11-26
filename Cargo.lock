@@ -3261,7 +3261,7 @@ dependencies = [
  "rand",
  "rayon",
  "reqwest",
- "rustic_core 0.7.0",
+ "rustic_core",
  "semver",
  "serde",
  "strum",
@@ -3278,60 +3278,6 @@ name = "rustic_cdc"
 version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fbcebf2228827bc4b61cb54dfd84cf43aacf06ca2dfe4c014b136a0e32b876e2"
-
-[[package]]
-name = "rustic_core"
-version = "0.6.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fc1b5cf696737fe234607d2e0dfb7e04a9eb3ae535b3b8090d77555992d097a7"
-dependencies = [
- "aes256ctr_poly1305aes",
- "binrw",
- "bytes",
- "bytesize",
- "cached",
- "cachedir",
- "chrono",
- "crossbeam-channel",
- "derive_more",
- "derive_setters",
- "dirs",
- "displaydoc",
- "dunce",
- "ecow",
- "enum-map",
- "enum-map-derive",
- "enumset",
- "filetime",
- "gethostname",
- "hex",
- "humantime",
- "ignore",
- "integer-sqrt",
- "itertools 0.13.0",
- "log",
- "nix",
- "pariter",
- "path-dedot",
- "quick_cache",
- "rand",
- "rayon",
- "runtime-format",
- "rustic_cdc",
- "scrypt",
- "serde",
- "serde-aux",
- "serde_derive",
- "serde_json",
- "serde_with",
- "sha2",
- "shell-words",
- "strum",
- "thiserror 2.0.3",
- "walkdir",
- "xattr",
- "zstd",
-]
 
 [[package]]
 name = "rustic_core"
@@ -3404,7 +3350,7 @@ dependencies = [
  "log",
  "once_cell",
  "rustic_backend",
- "rustic_core 0.6.1",
+ "rustic_core",
  "sailfish",
  "serde",
  "serde_derive",
