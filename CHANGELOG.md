@@ -4,6 +4,45 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+## [0.2.0](https://github.com/rustic-rs/rustic_scheduler/compare/v0.1.2...v0.2.0) - 2024-11-29
+
+### Fixed
+
+- rename executable and remove unused component reference in main.wxs
+
+### Other
+
+- remove i686-unknown-linux-gnu, armv7-unknown-linux-gnueabihf, and x86_64-unknown-netbsd targets from CI workflows and update target list
+- add installation of dependencies for i686-unknown-linux-gnu
+- add targets ([#67](https://github.com/rustic-rs/rustic_scheduler/pull/67))
+- update Rust version to 1.74.0 in Cargo.toml to use lints
+- Update dist-workspace.toml
+- enable GitHub attestations in release workflow and configuration
+- add Homebrew formula publishing to release workflow and update installers
+- *(deps)* update dependencies
+- remove Unicode-DFS-2016 from allow list and deny aws-lc-rs and aws-lc-sys due to build issues
+- update included files to include LICENSE-MIT and LICENSE-APACHE
+- add rust-cache action to release workflow and streamline target platforms
+- reorganize target platforms and add support for aarch64-unknown-linux-gnu
+- update target platforms and add dependencies for aarch64 architecture
+- *(deps)* update rustic_core to version 0.7.0 and rustic_backend to 0.5.1
+- *(deps)* update dependencies and add support for aarch64 architecture
+- add advisory ignore for RUSTSEC-2023-0071 due to lack of workaround
+- dprint fmt
+- *(deps)* update dependency
+- add CC0-1.0 to allowed licenses in deny.toml
+- update url dependency to version 2.5.4 and add dead code allowance in scheduler
+- add workspace linting configurations for Rust and Clippy
+- update installation instructions and improve client command usage
+- Migrate to abscissa framework (I)
+- update cross-compilation comments to include `aws-ls-sys` dependency issues and remove builds
+- update dependencies and refactor repository options structure to match rustic 0.6.0
+- add .vscode to .gitignore
+- add Justfile for build, check, and test automation
+- include extra static files in dist workspace configuration
+- add installation instructions for default feature on x86_64-unknown-linux-musl
+- *(release)* disable git releases, as cargo-dist does it
+
 ## [0.1.2](https://github.com/rustic-rs/rustic_scheduler/compare/v0.1.1...v0.1.2) - 2024-11-09
 
 ### Other
