@@ -13,6 +13,7 @@ keywords = [
 ]
 license = "Apache-2.0 OR MIT"
 repository = "https://github.com/rustic-rs/rustic_scheduler"
+rust-version = "1.74.0"
 description = """
 rustic scheduler - a client/server application to schedule regular backups on
 many clients to one identical repository controlled by a central scheduling
