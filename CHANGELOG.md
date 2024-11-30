@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+## [0.2.1](https://github.com/rustic-rs/rustic_scheduler/compare/v0.2.0...v0.2.1) - 2024-11-30
+
+### Other
+
+- add support for i686 and armv7 targets in CI workflows and configuration ([#69](https://github.com/rustic-rs/rustic_scheduler/pull/69))
+
 ## [0.2.0](https://github.com/rustic-rs/rustic_scheduler/compare/v0.1.2...v0.2.0) - 2024-11-29
 
 ### Fixed
